@@ -3,5 +3,24 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean id="user" class="edu.zsq.springtest.entity.User"></bean>
+    <bean id="user" class="edu.zsq.springtest.entity.User">
+        <!--set设置属性值-->
+
+        <!--设置字面量为 null-->
+        <property name="id">
+            <null/>
+        </property>
+        <!--设置字面量带特殊符号-->
+        <property name="name">
+            <value><![CDATA[
+                <<张三~>>
+            ]]></value>
+        </property>
+        <!--有参构造设置值-->
+        <constructor-arg name="id" value="1">
+        </constructor-arg>
+        <constructor-arg index="1">
+            <null/>
+        </constructor-arg>
+    </bean>
 </beans>

@@ -21,8 +21,6 @@ public class spring5test {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 //        获取配置创建的对象，并转换类型
         User user = context.getBean("user", User.class);
-        user.setId("1");
-        user.setName("张三");
         String id = user.getId();
         System.out.println(id+":"+user.getName());
 
