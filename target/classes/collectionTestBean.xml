@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!--1 提取list集合类型属性注入-->
+    <util:set id="setUtil">
+        <value>mysql</value>
+        <value>redis</value>
+    </util:set>
+
+    <bean id="collectionTest" class="edu.zsq.springtest.entity.CollectionTypeTest">
+
+        <!--数组类型注入-->
+        <property name="course">
+            <array>
+                <value>java</value>
+                <value>c++</value>
+            </array>
+        </property>
+
+        <!--数组类型注入-->
+        <property name="list">
+            <list>
+                <value>张三</value>
+                <value>李四</value>
+            </list>
+        </property>
+
+        <!--数组类型注入-->
+        <property name="map">
+            <map>
+                <entry key="age" value="20"></entry>
+                <entry key="age" value="21"></entry>
+            </map>
+        </property>
+
+        <!--数组类型注入-->
+        <!--        <property name="set">-->
+        <!--            <set>-->
+        <!--                <value>mysql</value>-->
+        <!--                <value>redis</value>-->
+        <!--            </set>-->
+        <!--        </property>-->
+
+        <!--2 注入提取的集合-->
+        <property name="set" ref="setUtil"></property>
+    </bean>
+
+
+</beans>

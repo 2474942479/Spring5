@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="lifeCycle" class="edu.zsq.springtest.service.impl.BeanLifeCycleServiceImpl" init-method="initMethod" destroy-method="destroyMethod">
+        <property name="status" value="成功注入"></property>
+    </bean>
+    <!--配置后置处理器   为所有Bean添加处理-->
+    <bean id="myBeanPost" class="edu.zsq.springtest.config.MyBeanPost"></bean>
+</beans>
