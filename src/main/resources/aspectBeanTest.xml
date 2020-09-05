@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+<!--    创建两个类对象-->
+    <bean id="userDao" class="edu.zsq.springtest.dao.impl.UserDaoImpl"></bean>
+    <bean id="myAspectXmlTest" class="edu.zsq.springtest.aopanno.MyAspectXmlTest"></bean>
+
+<!--    配置aop的aspect  强制使用cglib代理-->
+    <aop:config proxy-target-class="true">
+<!--        配置切入点-->
+        <aop:pointcut id="pointCut" expression="execution(* edu.zsq.springtest.dao.impl.UserDaoImpl.update(..))"/>
+<!--        配置切面 ref="增强类" method="要是用的增强类的方法名"  pointcut-ref="切入点id"-->
+        <aop:aspect ref="myAspectXmlTest" >
+            <aop:before pointcut-ref="pointCut" method="myBefore"/>
+        </aop:aspect>
+    </aop:config>
+
+</beans>

@@ -2,10 +2,12 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <!--开启组件扫描
+    <!--开启组件(注解)扫描
         1如果扫描多个包，多个包使用逗号隔开
         2扫描包上层目录
     -->
@@ -14,5 +16,9 @@
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
+<!--    开启Aspect生成对象  proxy-target-class 默认false  实现接口时使用jdk动态代理 true 强制使用gclib动态代理-->
+    <aop:aspectj-autoproxy  proxy-target-class="true">
+
+    </aop:aspectj-autoproxy>
 
 </beans>

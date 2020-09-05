@@ -11,8 +11,6 @@
     <dependencies>
 
 
-
-
         <!--spring core-->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -31,12 +29,39 @@
             <artifactId>spring-context</artifactId>
             <version>5.2.6.RELEASE</version>
         </dependency>
+
+        <!--spring aop-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>5.2.6.RELEASE</version>
+        </dependency>
+        <!--spring aspectJ-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
+            <version>5.2.6.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.aopalliance</groupId>
+            <artifactId>com.springsource.org.aopalliance</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.aspectj/com.springsource.org.aspectj.weaver -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>com.springsource.org.aspectj.weaver</artifactId>
+            <version>1.6.8.RELEASE</version>
+        </dependency>
+
         <!--spring dao-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-dao</artifactId>
             <version>2.0.8</version>
         </dependency>
+
 
         <!--spring jdbc-->
         <dependency>
@@ -46,19 +71,11 @@
         </dependency>
 
 
-
         <!--druid连接池-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
             <version>1.1.9</version>
-        </dependency>
-
-        <!--        spring aop-->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aop</artifactId>
-            <version>5.2.6.RELEASE</version>
         </dependency>
 
 

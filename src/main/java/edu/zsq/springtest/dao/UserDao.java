@@ -13,4 +13,12 @@ public interface UserDao {
      * @return
      */
     String insert();
+
+    /**
+     * AOP JDK动态代理
+     * @return
+     */
+    String find();
+
+
 }
