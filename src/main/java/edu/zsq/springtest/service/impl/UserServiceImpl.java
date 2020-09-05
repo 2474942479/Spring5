@@ -5,11 +5,14 @@ import edu.zsq.springtest.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
+ * @Transactional 开启事务注解
  * @author 张
  */
-@Service()
+@Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     /**

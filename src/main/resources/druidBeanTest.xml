@@ -14,8 +14,6 @@
         <property name="url" value="${prop.url}"></property>
         <property name="username" value="${prop.userName}"></property>
         <property name="password" value="${prop.password}"></property>
-
-
     </bean>
 
 </beans>
