@@ -33,7 +33,8 @@ public class spring5test {
 
 
     /**
-     * 测试 向类中注入对象
+     * 练习1 向类中注入对象
+     * 练习2 通过名称自动注入对象
      */
     @Test
     public void test2(){

@@ -3,9 +3,18 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean id="userService" class="edu.zsq.springtest.service.impl.UserServiceImpl">
+
+
+<!--实现自动装配
+    bean标签属性autowire，配置自动装配
+    autowire属性常用两个值:
+        byName根据属性名称注入，注入值bean的id值和类属性名称一样
+        byType根据属性类型注入
+    -->
+    <bean id="userService" class="edu.zsq.springtest.service.impl.UserServiceImpl" autowire="byName">
         <!--通过set方法注入对象  name：类里属性名称 ref：创建的userDao对象bean标签id值-->
-        <property name="userDao" ref="userDao"></property>
+<!--        <property name="userDao" ref="userDao"></property>-->
+
     </bean>
     <bean id="userDao" class="edu.zsq.springtest.dao.impl.UserDaoImpl"></bean>
 
