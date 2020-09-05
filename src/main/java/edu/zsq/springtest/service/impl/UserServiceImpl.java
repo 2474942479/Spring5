@@ -2,13 +2,23 @@ package edu.zsq.springtest.service.impl;
 
 import edu.zsq.springtest.dao.UserDao;
 import edu.zsq.springtest.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 /**
  * @author 张
  */
+@Service()
 public class UserServiceImpl implements UserService {
-    private UserDao userDao;
 
+    /**
+     * 根据类型注入  添加注解后可以不用加set方法
+     * @Qualifier 配合@Autowired使用，指定具体实现类
+     */
+    @Autowired
+    @Qualifier(value = "userDaoImpl1")
+    private UserDao userDao;
 
 
     public void setUserDao(UserDao userDao) {
