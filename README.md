@@ -242,3 +242,10 @@
         说明:注解方式表面无太大区别，底层不一样
         SpringMVC方式实现，同步阻塞的方式，基于SpringMVC+Servlet+Tomcat.
         SpringWebflux:方式实现，异步非阻塞方式，基于SpringWebflux+Reactor+Netty.
+    5、SpringWebflux（基于函数式编程模型）
+        (1)在使用函数式编程模型操作时候，需要自己初始化服务器
+        (2)基于函数式编程模型时候，有两个核心接口:RouterFunction(实现路由功能，请求转发
+        给对应的handler）和HandlerFunction(处理请求生成响应的函数）。核心任务定义两个函数
+        式接口的实现并且启动需要的服务器。
+        (3) SpringWebflux 请求和响应不再是ServletRequest和 ServletResponse,，而是
+        ServerReguest.和SerxerResponse
