@@ -5,6 +5,8 @@ import edu.zsq.springtest.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -12,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author 张
  */
 @Service
-@Transactional
+@Transactional(timeout = 5,rollbackFor = Exception.class,propagation = Propagation.REQUIRED,isolation = Isolation.REPEATABLE_READ)
 public class UserServiceImpl implements UserService {
 
     /**
@@ -20,7 +22,7 @@ public class UserServiceImpl implements UserService {
      * @Qualifier 配合@Autowired使用，指定具体实现类
      */
     @Autowired
-    @Qualifier(value = "userDaoImpl1")
+    @Qualifier( "userDaoImpl1")
     private UserDao userDao;
 
 

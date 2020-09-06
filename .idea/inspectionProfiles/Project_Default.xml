@@ -1,6 +1,11 @@
 <component name="InspectionProjectProfileManager">
   <profile version="1.0">
     <option name="myName" value="Project Default" />
+    <inspection_tool class="AbstractBeanReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ConfigurationProperties" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ContextComponentScanInconsistencyInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ContextJavaBeanUnresolvedMethodsInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="InjectionValueTypeInspection" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="JavaDoc" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="TOP_LEVEL_CLASS_OPTIONS">
         <value>
@@ -32,5 +37,37 @@
       <option name="IGNORE_POINT_TO_ITSELF" value="false" />
       <option name="myAdditionalJavadocTags" value="date" />
     </inspection_tool>
+    <inspection_tool class="MVCIncorrectMimeTypeReference" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="RequiredBeanTypeInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringBeanConstructorArgInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringBeanDepedencyCheckInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringBeanInstantiationInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringBeanLookupMethodInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringBootAdditionalConfig" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringBootApplicationSetup" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringBootBootstrapConfigurationInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringCacheableComponentsInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringComponentScan" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringConfigurationProxyMethods" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringContextConfigurationInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringFacetProgrammaticInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringFactoryMethodInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringHandlersSchemasHighlighting" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringIncorrectResourceTypeInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringInjectionValueConsistencyInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringJavaAutowiredFieldsWarningInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringJavaConfigInconsistencyInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringJavaConstructorAutowiringInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringJavaInjectionPointsAutowiringInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringLookupInjectionInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringMVCInitBinder" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringProfileExpression" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringRequiredAnnotationInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringRequiredPropertyInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringScopesInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringTransactionalComponentInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringXmlAutowiringInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringXmlModelInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="UtilSchemaInspection" enabled="true" level="WARNING" enabled_by_default="true" />
   </profile>
 </component>

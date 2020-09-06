@@ -78,7 +78,9 @@ IOC 实现原理 工厂模式  通过xml配置文件获取类的全路径  再�
     (2）一致性: 操作前后总量不变
     (3)隔离性：各个事务操作之间互不影响
     (4)持久性：事务提交后 表中数据发生变化
-3、事务操作（Spring事务管理介绍）
+    
+
+4、事务操作（Spring事务管理介绍）
 
     1)、事务添加到JavaEE三层结构里面Service层（业务逻辑层）
     2)、在Spring进行事务管理操作
@@ -86,11 +88,112 @@ IOC 实现原理 工厂模式  通过xml配置文件获取类的全路径  再�
     3)、声明式事务管理
        (1)基于注解方式(推荐)
        (2)基于xml配置文件方式
-4、在Spring进行声明式事务管理，底层使用AOP原理
+5、在Spring进行声明式事务管理，底层使用AOP原理实现了事务的添加
 
-5、Spring事务管理API.
+6、Spring开启声明式事务管理
 
-    (1）提供一个接口，代表事务管理器，这个接口针对不同的框架提供不同的实现类。
+    (1）提供一个接口(PlatformTransactionManager)，代表事务管理器，这个接口针对不同的框架提供不同的实现类。
+    (2)xml开启事务管理添加并在service实现类上添加@Transactional注解
+        @Transactional注解参数：    
+            1、propagation:事务传播行为(默认REQUIRED)  多事务方法(对表中数据进行变化的操作 增删改)之间直接调用，这个过程中事务是如何管理的
+                1).PROPAGATION_REQUIRED ,required ,必须使用事务  （默认值）
+                    A 如果使用事务，B 使用同一个事务。（支持当前事务）
+                    A 如果没有事务，B将创建一个新事务。
+                2).PROPAGATION_SUPPORTS，supports ，支持事务
+        　　　　　　　A 如果使用事务，B 使用同一个事务。（支持当前事务）
+        　　　　　　　A 如果没有事务，B 将以非事务执行。
+                3).PROPAGATION_MANDATORY，mandatory 强制
+                    A 如果使用事务，B 使用同一个事务。（支持当前事务）
+                    A 如果没有事务，B 抛异常
+                4).PROPAGATION_REQUIRES_NEW ， requires_new ，必须是新事务
+                    A 如果使用事务，B将A的事务挂起，再创建新的。
+                    A 如果没有事务，B将创建一个新事务  
+                5).PROPAGATION_NOT_SUPPORTED ，not_supported 不支持事务
+                    A 如果使用事务，B将A的事务挂起，以非事务执行
+                    A 如果没有事务，B 以非事务执行
+                6).PROPAGATION_NEVER，never 从不使用
+                    A 如果使用事务，B 抛异常
+                    A 如果没有事务，B 以非事务执行 
+                7).PROPAGATION_NESTED nested 嵌套
+                    A 如果使用事务，B将采用嵌套事务。
+     　　　　　　嵌套事务底层使用Savepoint 设置保存点，将一个事务，相当于拆分多个。比如业务A为AB两个曹祖，业务B为CD两个操作，业务AB使用同一个事务，在AB (POINT） CD，当业务B失败时，回滚到POINT处，从而业务A还是成功的，就是保持点的操作。
+    　　　　　　　　底层使用嵌套try方式
+            掌握：PROPAGATION_REQUIRED、PROPAGATION_REQUIRES_NEW、PROPAGATION_NESTED
+            
+            2、ioslation:事务隔离级别
+                3个读问题：
+                    脏读：读取到未提交的数据
+                    不可重复读：读取到已经提交的数据(update)
+                    幻读：读取到已经提交的数据(insert)
+                
+                解决隔离问题(4种隔离级别)
+                    读未提交：存在三个问题。
+                    读已提交：存在两个问题，解决脏读问题(Oracle默认级别)
+                    可重复读：存在一个问题，解决脏读，不可重复读问题(Mysql默认级别)
+                    串行化：解决所有问题。  
+            3、timeout:超时时间
+                (1）事务需要在一定时间内进行提交，如果不提交进行回滚↓
+                (2）默认值是-1，设置时间以秒单位进行计算
+            4、readOnly:是否只读
+                (1）读:查询操作，写:添加修改删除操作·
+                (2) readOnly_默认值false，表示可以查询，可以添加修改删除操作
+                (3）设置readOnly值是true，设置成true之后，只能查询。
+            5、rollbackFor:回滚·设置出现哪些异常进行事务回滚
+            6、noRollbackFor:不回滚·设置出现哪些异常不进行事务回滚
+四、Spring5 新特性
+1、核心特性
 
+        JDK8的增强:
+        。访问Resuouce时提供getFile或和isFile防御式抽象
+        。有效的方法参数访问基于java 8反射增强
+        。在Spring核心接口中增加了声明default方法的支持一贯使用JDK┐Charset和StandardCharsets的增强
+        。兼容JDK9
+        . Spring 5.o框架自带了通用的日志封装
+        。持续实例化via构造函数(修改了异常处理)
+        .Spring 5.o框架自带了通用的日志封装
+        . springjcl替代了通用的日志，仍然支持可重写
+        。自动检测log4j 2.x,SLF4J,JUL(java.util.Logging）而不是其他的支持
+        。访问Resuouce时提供getFile或和isFile防御式抽象
+        。基于NIO的readableChannel也提供了这个新特性
+        
+2、核心容器
 
-　
+        。支持候选组件索引(也可以支持环境变量扫描)
+        。支持@Nullable注解
+            @Nullable注解可以使用在方法上面，属性上面，参数上面，表示方法返回可以为空，属性值可以为空，参数值可以为空
+
+        。函数式风格GenericApplicationContext/AnnotationConfigApplicationContext
+        。基本支持bean API注册
+        。在接口层面使用CGLIB动态代理的时候，提供事物，缓存，异步注解检测
+        .XML配置作用域流式
+        .Spring WebMVC
+        。全部的Servlet 3.1签名支持在Spring-provied Filter实现
+        。在Spring MVC Controller方法里支持Servlet4.o PushBuilder参数
+        。多个不可变对象的数据绑定(Kotlin/ Lombok/@ConstructorPorties)
+        。支持jackson2.9
+        。支持JSON绑定API
+        。支持protobuf3
+        。支持Reactorg.1Flux和Mono
+
+3、Spring5框架新功能（Webflux) 
+
+    1、SpringWebflux介绍(应用于网关)
+        (1)是Spring5添加新的模块，用于web 开发的，功能和SpringMVC类似的，Webflux使用当前一种比较流程响应式编程出现的框架。
+        (2)使用传统web框架，比如SpringMVC，这些基于Servlet,容器，Webflux是一种异步非阻塞的框架，异步非阻塞的框架在Servlet3.1以后才支持，核心是基于Reactor的相关API实现的
+        (3）什么是异步非阻塞
+            异发和同步 ： 异步和同步针对调用者，调用者发送请求，如果等着对方回应之后才去做其他事情就是同步，如果发送请求之后不等着对方回应就去做其他事情就是异步。
+            非阻塞和阻塞：阻塞和非阻塞针对被调用者，被调用者受到请求之后，做完请求任务之后才给出反馈就是阻塞，受到请求之后马上给出反馈然后再去做事情就是非阻塞。
+            上面都是针对对象不一样，
+        (4)Webflux特点:
+            第一 非阻塞式:在有限资源下，提高系统吞吐量和伸缩性，以Reactor为基础实现响应式编程.
+            第二 函数式编程:Spring5框架基于java8，Webflux使用Java8函数式编程方式实现路由请求
+        (5)与SpringMVC比较:
+            第一 两个框架都可以使用注解方式，都运行在Tomet等容器中
+            第二 SpringMVC采用命令式编程，Webflux采用异步响应式编程
+    
+    2、响应式编程
+        (1)什么是响应式编程
+            响应式编程是一种面向数据流和变化传播的编程范式。这意味着可以在编程语言中很方便地表达静态或动态的数据流，而相关的计算模型会自动将变化的值通过数据流进行传播。
+            电子表格程序就是响应式编程的一个例子。单元格可以包含字面值或类似"=B1+C1"的公式，而包含公式的单元格的值会依据其他单元格的值的变化而变化。
+        (2）Java8及其之前版本
+            提供的观察者模式(案例:军队哨兵,发现敌人,发出通知，做出响应)两个类 Observer和 Observable

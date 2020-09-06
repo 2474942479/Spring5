@@ -145,8 +145,8 @@ public class spring5test {
                 UserDao.class}, (proxy, method, args) -> {
             System.out.println(method.getName() + "方法执行前执行了.............");
 //            通过判断方法名  实现哪些方法可以被代理
-            if (!"inset".equals(method.getName())) {
-                return null;
+            if (!"insert".equals(method.getName())) {
+                return "不是insert方法,终止执行！！！";
             }
             String res = (String) method.invoke(userDao, args);
             System.out.println(method.getName() + "方法执行后执行了.............");
