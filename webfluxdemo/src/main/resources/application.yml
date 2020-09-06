@@ -1,0 +1,16 @@
+server:
+  port: 8001
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  datasource:
+    url: jdbc:mysql://localhost:3307/mybatis_plus?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:edu/zsq/webfluxdemo/mapper/xml/*.xml

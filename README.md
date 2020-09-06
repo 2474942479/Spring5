@@ -1,5 +1,5 @@
-一  IOC
-IOC 实现原理 工厂模式  通过xml配置文件获取类的全路径  再根据反射的Class.forName(全路径)获取类的class文件,再通过class.newInstance()实例化对象  从而实现解耦。
+一 IOC
+    实现原理: 工厂模式  通过xml配置文件获取类的全路径  再根据反射的Class.forName(全路径)获取类的class文件,再通过class.newInstance()实例化对象  从而实现解耦。
 1、IOC思想基于IOC容器完成，IOC容器底层就是对象工厂
 
     (1)BeanFactory:IOC容器基本实现，是Spring内部的使用接口，不提供开发人员进行使用
@@ -16,7 +16,7 @@ IOC 实现原理 工厂模式  通过xml配置文件获取类的全路径  再�
     (4) bean可以使用了对象获取到了)
     (5）当容器关闭时候，调用bean的销毁的方法（需要进行配置销毁的方法）
 
-二    AOP
+二 AOP
 1、什么是AOP
 
     (1）面向切面编程（方面)，利用AOP可以对业务逻辑的各个部分进行隔离，从而使得业务逻辑各部分之间的耦合度降低，提高程序的可重用性，同时提高了开发的效率。
@@ -66,7 +66,7 @@ IOC 实现原理 工厂模式  通过xml配置文件获取类的全路径  再�
        在增强类上面添加注解@Order(数字类型值) 数字越小  优先级越高
        
 三 事务      
-1、什么事务
+1、什么是事务
 
     (1）事务是数据库操作最基本单元，逻辑上一组操作，要么都成功，如果有一个失败所有操作都失败
     (2）典型场景:银行转账
@@ -196,4 +196,49 @@ IOC 实现原理 工厂模式  通过xml配置文件获取类的全路径  再�
             响应式编程是一种面向数据流和变化传播的编程范式。这意味着可以在编程语言中很方便地表达静态或动态的数据流，而相关的计算模型会自动将变化的值通过数据流进行传播。
             电子表格程序就是响应式编程的一个例子。单元格可以包含字面值或类似"=B1+C1"的公式，而包含公式的单元格的值会依据其他单元格的值的变化而变化。
         (2）Java8及其之前版本
-            提供的观察者模式(案例:军队哨兵,发现敌人,发出通知，做出响应)两个类 Observer和 Observable
+            观察者模式(案例:军队哨兵,发现敌人,发出通知，做出响应)
+            实现观察者模式的两个类 Observer和 Observable
+        (3)、响应式编程（Reactor实现）
+            (1  响应式编程操作中，Reactor是满足Reactive规范框架
+            (2  Reactor有两个核心类，Mono和Flux，这两个类实现接口Publisher，提供丰富操作符。Flux对象实现发布者，返回N个元素;Mono实现发布者，返回0或者1个元素
+            (3  Flux和Mono都是数据流的发布者，使用Flux和Mono都可以发出三种数据信号:元素值，错误信号，完成信号，错误信号和完成信号都代表终止信号，终止信号用于告诉订阅者数据流结束了，错误信号终止数据流同时把错误信息传递给订阅者
+            (4  三种信号特点
+                *错误信号和完成信号都是终止信号，不能共存的
+                *如果没有发送任何元素值，而是直接发送错误或者完成信号，表示是空数据流
+                *如果没有错误信号，没有完成信号，表示是无限数据流
+            (5  调用just或者其他方法只是声明数据流，数据流并没有发出，只有进行订阅之后才会触发数据流，不订阅什么都不会发生的
+                //just方法直接声明    subscribe()订阅
+                Flux.just(1,2,3,4). subscribe(System.out::print);
+                Mono.just(1).subscribe(System.out::print);
+            (6  操作符(类似java8 新特性stream流的操作符): 对数据流进行一道道操作，称为操作符，比如工厂流水线·
+                第一 map操作符 将元素映射为新元素
+                第二 flatmap操作符 将每个元素映射为流,最终合并成一个大流  
+                    
+    3、SpringFlux执行流程:   SpringWebflux执行过程和 SpringMVC相似的
+    
+        SpringWebflux核心控制器DispatchHandler，实现接口WebHandler 
+            *接口 WebHandler有一个方法: 
+                Mono<Void> handle(ServerWebExchange var1);
+                实现类: DispatcherHandler中的handle方法
+                
+                    public Mono<Void> handle(ServerWebExchange exchange) {  //  ServerWebExchange 放http请求响应信息
+                            return this.handlerMappings == null ? this.createNotFoundError() : Flux.fromIterable(this.handlerMappings).concatMap((mapping) -> {
+                                return mapping.getHandler(exchange);    //根据请求获取对应的Mapping(映射匹配)
+                            }).next().switchIfEmpty(this.createNotFoundError()).flatMap((handler) -> {
+                                return this.invokeHandler(exchange, handler);   //执行具体业务
+                            }).flatMap((result) -> {
+                                return this.handleResult(exchange, result);     //返回处理结果
+                            });
+                        }
+        SpringWebflux核心组件
+            *DispatcherHandler，负责请求的处理
+            *HandlerMapping:请求查询到处理的方法
+            *HandlerAdapter:真正负责请求处理
+            *HandlerResultHandler:响应结果处理
+            
+        Spring Webflux实现函数式编程，实现两个接口:RourerFunction(路由处理)和HandlerFunction(处理函数）↓
+        
+    4、Spring Webflux(基于注解编程模型)
+        说明:注解方式表面无太大区别，底层不一样
+        SpringMVC方式实现，同步阻塞的方式，基于SpringMVC+Servlet+Tomcat.
+        SpringWebflux:方式实现，异步非阻塞方式，基于SpringWebflux+Reactor+Netty.
