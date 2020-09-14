@@ -1,4 +1,4 @@
-一 IOC
+## 一 IOC
     实现原理: 工厂模式  通过xml配置文件获取类的全路径  再根据反射的Class.forName(全路径)获取类的class文件,再通过class.newInstance()实例化对象  从而实现解耦。
 1、IOC思想基于IOC容器完成，IOC容器底层就是对象工厂
 
